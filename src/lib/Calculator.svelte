@@ -74,7 +74,7 @@
     const subjectContainer = document.getElementById("subject-container");
 
     const newSubjectDiv: any = document.createElement("div");
-    newSubjectDiv.className = "grid grid-cols-7 subject-div gap-2 items-center justify-center";
+    newSubjectDiv.className = "grid grid-cols-7 subject-div gap-2 items-center justify-center transition-transform transform duration-300 ease-in-out";
     
 
     const inputNames = ["Name", "Cr", "Marks"];
@@ -109,28 +109,31 @@
     
   };
 
-  const handleRemove = (divToRemove: HTMLDivElement) => {
+    const handleRemove = (divToRemove: HTMLDivElement) => {
     const subjectContainer = document.getElementById("subject-container");
-    subjectContainer?.removeChild(divToRemove);
-   
+    divToRemove.classList.add("opacity-0", "scale-0");
+    setTimeout(() => {
+      subjectContainer?.removeChild(divToRemove);
+    }, 300); // Assuming the duration of the transition is 300ms
   };
 </script>
 
 
-<div class="flex justify-center items-center flex-col"><div class="flex gap-1 my-3 mx-5 md:mx-10 lg:mx-15 xl:mx-20 2xl:mx-24">
-  <button class="w-[30px] h-[30px] rounded-full bg-green-800 text-white" on:click={handleAdd}>+</button>
-  <h3 class="text-xl font-bold ml-3">Add Course:</h3>
-</div>
+<div class="flex justify-center items-center flex-col">
+  <div class="flex gap-1 my-3 mx-5 md:mx-10 lg:mx-15 xl:mx-20 2xl:mx-24">
+    <button class="w-[30px] h-[30px] rounded-full bg-green-800 text-white transition-transform transform hover:scale-110" on:click={handleAdd}>+</button>
+    <h3 class="text-xl font-bold ml-3 transition-transform transform hover:scale-110">Add Course:</h3>
+  </div>
 
-<hr class="my-2"/>
+  <hr class="my-2" />
 
-<form on:submit={handleSubmit} class="w-full md:w-[50%] p-1 ">
-
-  {#if totalCreditHours > 0}
-<div class="my-2 bg-green-700 text-white font-semibold flex justify-around items-center gap-3 text-lg p-2 rounded-md shadow-md"> <p class="ml-3">GPA: {gpa.toFixed(2)}</p><p class="ml-3">Total Credit Hours: {totalCreditHours}</p>
- </div>
-  
-{/if}
+  <form on:submit={handleSubmit} class="w-full md:w-[50%] p-1 transition-all duration-300 ease-in-out">
+    {#if totalCreditHours > 0}
+      <div class="my-2 bg-green-700 text-white font-semibold flex justify-around items-center gap-3 text-lg p-2 rounded-md shadow-md transition-all duration-300 ease-in-out">
+        <p class="ml-3 transition-transform transform hover:scale-110">GPA: {gpa.toFixed(2)}</p>
+        <p class="ml-3 transition-transform transform hover:scale-110">Total Credit Hours: {totalCreditHours}</p>
+      </div>
+    {/if}
   <div id="subject-container" class="flex flex-col gap-2 ">
     <div class="grid grid-cols-7 items-center gap-2 font-semibold ">
       
@@ -142,7 +145,7 @@
   </div>
   </div>
   
-  <button type="submit" class="bg-green-800 w-full uppercase font-bold text-white p-3 rounded-md my-3 hover:bg-green-900 hover:shadow-lg hover:scale-105 transition-all">Calculate</button>
+   <button type="submit" class="bg-green-800 w-full uppercase font-bold text-white p-3 rounded-md my-3 hover:bg-green-900 hover:shadow-lg hover:scale-105 transition-all">Calculate</button>
 </form></div>
 
 
